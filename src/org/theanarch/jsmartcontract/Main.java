@@ -45,7 +45,6 @@ public class Main {
             blockChain.add(genesis);
 
 
-
             //NOW THAT WE HAVE THE GENESIS CREATED LETS CREATE A SMART CONTRACT, IN THIS CASE WE WILL MAKE A CHAIN,
             //HOWEVER IF IN MOST CASES YOU WILL WANT TO MAKE THE SMART CONTRACT REFER TO THE GENESIS BLOCK BUT NOT
             //A PART OF THE CHAIN
@@ -94,14 +93,7 @@ public class Main {
             }else{
                 System.err.println("BlockChain has some errors...");
             }
-
-
-
-
-
-
-
-
+            
         }catch(Exception e){
             e.printStackTrace();
         }
