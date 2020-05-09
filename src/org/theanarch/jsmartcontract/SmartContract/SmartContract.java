@@ -40,6 +40,20 @@ public class SmartContract extends Thread {
         context.setDebugger(observingDebugger, new Integer(0));
         context.setGeneratingDebug(true);
         context.setOptimizationLevel(-1);
+        context.setWrapFactory(new SandboxWrapFactory());
+
+        context.setClassShutter(new ClassShutter(){
+            @Override
+            public boolean visibleToScripts(String s){
+                if(s.equals("org.theanarch.jsmartcontract.SmartContract.BlockMath") ||
+                        s.equals("java.lang.Long") ||
+                        s.equals("java.io.PrintStream")){
+                    return true;
+                }
+                //System.out.println(s);
+                return false;
+            }
+        });
 
         try{
             long time = request.getLong("time");
