@@ -75,6 +75,8 @@ public class BlockHandler {
             if(!matcher.group(1).equals(hashTarget)){
                 return false;
             }
+        }else{
+            return false;
         }
         return true;
     }
@@ -104,6 +106,8 @@ public class BlockHandler {
                 if(!matcher.group(1).equals(hashTarget)){
                     return false;
                 }
+            }else{
+                return false;
             }
         }
         return true;
