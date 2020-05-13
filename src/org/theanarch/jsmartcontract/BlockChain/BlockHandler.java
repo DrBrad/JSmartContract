@@ -62,10 +62,19 @@ public class BlockHandler {
     }
 
     public static Boolean isBlockValid(Block block){
+        String hashTarget = new String(new char[difficulty]).replace('\0', '0');
+        
         //compare registered hash and calculated hash:
         if(!block.hash.equals(block.calculateBlockHash())){
             //System.out.println("Current Hashes not equal");
             return false;
+        }
+        //check if hash is solved
+        Matcher matcher = Pattern.compile("(.*?)[a-f1-9].*").matcher(block.hash);
+        if(matcher.matches()){
+            if(!matcher.group(1).equals(hashTarget)){
+                return false;
+            }
         }
         return true;
     }
@@ -90,9 +99,11 @@ public class BlockHandler {
                 return false;
             }
             //check if hash is solved
-            if(!currentBlock.hash.substring(0, difficulty).equals(hashTarget)){
-                //System.out.println("This block hasn't been mined");
-                return false;
+            Matcher matcher = Pattern.compile("(.*?)[a-f1-9].*").matcher(currentBlock.hash);
+            if(matcher.matches()){
+                if(!matcher.group(1).equals(hashTarget)){
+                    return false;
+                }
             }
         }
         return true;
